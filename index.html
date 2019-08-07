@@ -70,7 +70,7 @@
 
 
 <div id="pages" class='pageLinks'>
-    <div class = 'firstCell' id='firstPage'><a href='#first'>First</a></div>
+    <div class = 'firstCell' id='firstPage'><a href='#1'>First</a></div>
     <div class = 'lastCell' id ='previousPage'>Previous</div>
     <div class = 'lastCell' id ='currentPage'><a href='#1'>1</a> </div>
     <div class = 'emailCell' id='nextPage'>Next</div>
@@ -114,6 +114,8 @@
 
       }
 
+
+      
 
 
 
@@ -165,6 +167,21 @@
 
       }
       loadData();
+
+      function loadLinks() {
+
+        let htmlLinks = `<div class = 'firstCell' id='firstPage'><a href='#1'>First</a></div>
+    <div class = 'lastCell' id ='previousPage'>Previous</div>
+    <div class = 'lastCell' id ='currentPage'><a href='#1'>1</a> </div>
+    <div class = 'emailCell' id='nextPage'>Next</div>
+    <div class = 'titleCell' id= 'lastPage'><a href='#last'>Last</a></div>`
+
+        document.querySelector('#pages').innerHTML = htmlLinks;
+      }
+
+      loadLinks();
+
+
 
       //convert to json
       //display it in list
