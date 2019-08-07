@@ -1,0 +1,192 @@
+<html>
+  <head>
+    <style>
+      .userData{
+        display: flex;
+        flex-direction: row;
+        align-items:flex-start;
+
+      }
+
+      .headingData{
+        display: flex;
+        flex-direction: row;
+        align-items:flex-start;
+
+      }
+
+      .firstCell {
+        display: flex;
+        padding: .5rem;
+        margin: 1rem;
+        width: 100px;
+      }
+      .lastCell {
+        display: flex;
+        padding: .5rem;
+        margin: 1rem;
+        width: 100px;
+      }
+      .emailCell {
+        display: flex;
+        padding: .5rem;
+        margin: 1rem;
+        width: 250px;
+      }
+      .titleCell {
+        display: flex;
+        padding: .5rem;
+        margin: 1rem;
+        width: 250px;
+      }
+
+      .heading {
+       background-color: dodgerblue;
+       color: white;
+       font-family: Verdana;
+       font-weight: bold;
+      }
+
+      h1 {
+        font-family: verdana;
+      }
+
+      .pageLinks {
+        display: flex;
+        flex-direction: row;
+        align-items:flex-start;
+        font-family: verdana;
+      }
+
+      #lastPage, #firstPage {
+       text-decoration: underline;
+       color: blue;
+      }
+
+    </style>
+  </head>
+  <body>
+<h1> Acme Employee Lister</h1>
+
+
+<div id="pages" class='pageLinks'>
+    <div class = 'firstCell' id='firstPage'><a href='#first'>First</a></div>
+    <div class = 'lastCell' id ='previousPage'>Previous</div>
+    <div class = 'lastCell' id ='currentPage'><a href='#1'>1</a> </div>
+    <div class = 'emailCell' id='nextPage'>Next</div>
+    <div class = 'titleCell' id= 'lastPage'><a href='#last'>Last</a></div>
+</div>
+
+
+    <div id="titles" class='headingData'>
+            <div class = 'heading firstCell'>First Name</div>
+            <div class = 'heading lastCell'>Last Name</div>
+            <div class = 'heading emailCell'>Email</div>
+            <div class = 'heading titleCell'>Title</div>
+    </div>
+    <div id = "list">
+
+
+    </div>
+
+    <script>
+      //fetch data
+
+      const loadData1 = async() => {
+        const response = await fetch('https://acme-users-api-rev.herokuapp.com/api/users/1');
+        const data = await response.json();
+        const dataArray = [...data.users];
+        console.log(Array.isArray(dataArray));
+        console.log(dataArray);
+        const html = dataArray.map((emp)=>{
+          return `<div class = "userData">
+                  <div class = 'firstCell'>${emp.firstName}</div>
+                  <div class = 'lastCell'>${emp.lastName}</div>
+                  <div class = 'emailCell'>${emp.email}</div>
+                  <div class = 'titleCell'>${emp.title}</div>
+                  </div>
+                  `
+          }).join('');
+
+        document.querySelector('#list').innerHTML = html;
+
+        //console.log(data);
+
+      }
+
+
+
+
+      const loadDataLast = async() => {
+        const response = await fetch('https://acme-users-api-rev.herokuapp.com/api/users/2');
+        const data = await response.json();
+        const dataArray = [...data.users];
+        console.log(Array.isArray(dataArray));
+        console.log(dataArray);
+        const html = dataArray.map((emp)=>{
+          return `<div class = "userData">
+                  <div class = 'firstCell'>${emp.firstName}</div>
+                  <div class = 'lastCell'>${emp.lastName}</div>
+                  <div class = 'emailCell'>${emp.email}</div>
+                  <div class = 'titleCell'>${emp.title}</div>
+                  </div>
+                  `
+          }).join('');
+
+        document.querySelector('#list').innerHTML = html;
+
+        //console.log(data);
+
+      }
+
+
+
+
+
+      const loadData = async() => {
+        const response = await fetch('https://acme-users-api-rev.herokuapp.com/api/users');
+        const data = await response.json();
+        const dataArray = [...data.users];
+        console.log(Array.isArray(dataArray));
+        console.log(dataArray);
+        const html = dataArray.map((emp)=>{
+          return `<div class = "userData">
+                  <div class = 'firstCell'>${emp.firstName}</div>
+                  <div class = 'lastCell'>${emp.lastName}</div>
+                  <div class = 'emailCell'>${emp.email}</div>
+                  <div class = 'titleCell'>${emp.title}</div>
+                  </div>
+                  `
+          }).join('');
+
+        document.querySelector('#list').innerHTML = html;
+
+        //console.log(data);
+
+      }
+      loadData();
+
+      //convert to json
+      //display it in list
+      //then pages
+
+      const firstPage = document.querySelector('#firstPage');
+      firstPage.addEventListener('click', (ev) => {
+        loadData();
+      });
+
+
+      const lastPage = document.querySelector('#lastPage');
+      lastPage.addEventListener('click', (ev) => {
+        loadDataLast();
+      });
+
+      window.addEventListener('hashchange', () =>{
+        const currentPage = window.location.hash;
+
+        loadDataLast();
+      })
+
+    </script>
+  </body>
+</html>
